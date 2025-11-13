@@ -48,7 +48,8 @@ function redrawLayout() {
     let headerCount = (includeTopHeaderCheckbox.checked ? 1 : 0) + (includeBottomHeaderCheckbox.checked ? 1 : 0);
     let newHeight = imageHeight + headerCount * 50;
     canvas.height = newHeight;
-
+    textXInput.max = canvas.width;
+    textYInput.max = canvas.height;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#ffffff';
@@ -111,20 +112,40 @@ selectTextDropdown.addEventListener('change', () => {
     }
 });
 
-updateTextButton.addEventListener('click', () => {
+textXInput.addEventListener('change', () => {
     if (selectedTextIndex >= 0 && selectedTextIndex < texts.length) {
-        const selectedTextObj = texts[selectedTextIndex];
-        selectedTextObj.content = selectedTextInput.value;
-        selectedTextObj.fontSize = parseInt(fontSizeInput.value);
-        selectedTextObj.color = fontColorInput.value;
-        selectedTextObj.x = parseInt(textXInput.value);
-        selectedTextObj.y = parseInt(textYInput.value);
-        updateSelectTextDropdown();
-        selectTextDropdown.value = String(selectedTextIndex);
+        texts[selectedTextIndex].x = parseInt(textXInput.value);
+        redrawLayout();
+    }
+});
+textYInput.addEventListener('change', () => {
+    if (selectedTextIndex >= 0 && selectedTextIndex < texts.length) {
+        texts[selectedTextIndex].y = parseInt(textYInput.value);
+        redrawLayout();
+    }
+});
+fontSizeInput.addEventListener('change', () => {
+    if (selectedTextIndex >= 0 && selectedTextIndex < texts.length) {
+        texts[selectedTextIndex].fontSize = parseInt(fontSizeInput.value);
+        redrawLayout();
+    }
+});
+fontColorInput.addEventListener('change', () => {
+    if (selectedTextIndex >= 0 && selectedTextIndex < texts.length) {
+        texts[selectedTextIndex].color = fontColorInput.value;
         redrawLayout();
     }
 });
 
+deleteTextButton.addEventListener('click', () => {
+    if (selectedTextIndex >= 0 && selectedTextIndex < texts.length) {
+        texts.splice(selectedTextIndex, 1);
+        selectedTextIndex = -1;
+        selectedTextInput.value = '';
+        updateSelectTextDropdown();
+        redrawLayout();
+    }
+});
 loadImageButton.addEventListener('click', () => {
     const imageUrl = document.getElementById('imageUrl').value;
     const ctx = canvas.getContext('2d');
