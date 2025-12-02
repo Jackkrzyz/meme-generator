@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "openai": "^6.9.0"
+  },
+  "name": "meme-generator",
+  "version": "1.0.0",
+  "description": "1. Run this command in the project's root directory: ``` npm i ``` 2. Create a .env file in the project's root directory ``` OPENAI_API_KEY=YOUR_API_KEY PORT=OPEN_PORT (ex: 8080) ``` 3. Run this command in the project's root directory: ``` node server.js ```",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jackkrzyz/meme-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jackkrzyz/meme-generator/issues"
+  },
+  "homepage": "https://github.com/Jackkrzyz/meme-generator#readme"
+}
